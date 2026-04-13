@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes Panel</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="logo-icon">☤</span>
+                    <span class="logo-text">Hermes Panel</span>
+                </div>
+                <div class="connection-status" id="connectionStatus">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Connecting...</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="system-stats" id="systemStats">
+                    <span class="stat">
+                        <span class="stat-label">Sessions:</span>
+                        <span class="stat-value" id="totalSessions">-</span>
+                    </span>
+                    <span class="stat">
+                        <span class="stat-label">Messages:</span>
+                        <span class="stat-value" id="totalMessages">-</span>
+                    </span>
+                    <span class="stat">
+                        <span class="stat-label">Skills:</span>
+                        <span class="stat-value" id="totalSkills">-</span>
+                    </span>
+                </div>
+                <div class="current-time" id="currentTime"></div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main">
+            <!-- Sidebar -->
+            <nav class="sidebar">
+                <div class="nav-tabs">
+                    <button class="nav-tab active" data-tab="chat">
+                        <span class="tab-icon">💬</span>
+                        <span class="tab-label">Chat</span>
+                    </button>
+                    <button class="nav-tab" data-tab="agents">
+                        <span class="tab-icon">🤖</span>
+                        <span class="tab-label">Agents</span>
+                    </button>
+                    <button class="nav-tab" data-tab="projects">
+                        <span class="tab-icon">📁</span>
+                        <span class="tab-label">Projects</span>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Content Area -->
+            <main class="content">
+                <!-- Chat Tab -->
+                <div class="tab-content active" id="tab-chat">
+                    <div class="chat-layout">
+                        <div class="sessions-panel">
+                            <div class="panel-header">
+                                <h2>Sessions</h2>
+                                <button class="btn btn-small" onclick="refreshSessions()">↻</button>
+                            </div>
+                            <div class="sessions-list" id="sessionsList">
+                                <div class="loading">Loading sessions...</div>
+                            </div>
+                        </div>
+                        <div class="messages-panel">
+                            <div class="panel-header">
+                                <h2 id="chatTitle">Select a session</h2>
+                            </div>
+                            <div class="messages-list" id="messagesList">
+                                <div class="empty-state">
+                                    Select a session from the left panel to view messages
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agents Tab -->
+                <div class="tab-content" id="tab-agents">
+                    <div class="agents-header">
+                        <h2>Active Agents</h2>
+                        <button class="btn" onclick="refreshAgents()">↻ Refresh</button>
+                    </div>
+                    <div class="agents-grid" id="activeAgentsGrid">
+                        <div class="loading">Loading active agents...</div>
+                    </div>
+                    
+                    <div class="agents-history-section">
+                        <h3>Agent History</h3>
+                        <div class="table-container">
+                            <table class="data-table" id="agentsHistoryTable">
+                                <thead>
+                                    <tr>
+                                        <th>Session ID</th>
+                                        <th>Source</th>
+                                        <th>Model</th>
+                                        <th>Started</th>
+                                        <th>Messages</th>
+                                        <th>Tool Calls</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="agentsHistoryBody">
+                                    <tr>
+                                        <td colspan="7" class="loading">Loading history...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Tab -->
+                <div class="tab-content" id="tab-projects">
+                    <div class="projects-header">
+                        <h2>Skills & Projects</h2>
+                        <button class="btn" onclick="refreshProjects()">↻ Refresh</button>
+                    </div>
+                    
+                    <div class="projects-stats" id="projectsStats">
+                        <div class="stat-card">
+                            <span class="stat-number" id="skillsCount">-</span>
+                            <span class="stat-label">Total Skills</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="cronJobsCount">-</span>
+                            <span class="stat-label">Cron Jobs</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="contextFilesCount">-</span>
+                            <span class="stat-label">Context Files</span>
+                        </div>
+                    </div>
+
+                    <div class="projects-section">
+                        <h3>Skills by Category</h3>
+                        <div class="categories-grid" id="skillsCategories">
+                            <div class="loading">Loading skills...</div>
+                        </div>
+                    </div>
+
+                    <div class="projects-section">
+                        <h3>Cron Jobs</h3>
+                        <div class="cron-jobs-list" id="cronJobsList">
+                            <div class="loading">Loading cron jobs...</div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <span class="footer-text">Hermes Panel v0.1.0</span>
+            <span class="footer-divider">|</span>
+            <span class="footer-status" id="footerStatus">Auto-refresh in <span id="refreshCountdown">5</span>s</span>
+        </footer>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
