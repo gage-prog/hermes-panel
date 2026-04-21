@@ -1,0 +1,21 @@
+app = "hermes-panel"
+primary_region = "ams"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+  HERMES_PANEL_PIN = "654321"
+
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 8080
+
+  [services.tcp_checks]
+    interval = "10s"
+    timeout = "2s"

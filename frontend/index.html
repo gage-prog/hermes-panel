@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes Control Panel</title>
+    <link rel="stylesheet" href="/static/css/theme.css">
+    <link rel="stylesheet" href="/static/css/components.css">
+    <link rel="stylesheet" href="/static/css/views.css">
+</head>
+<body>
+    <!-- PIN Login Gate -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-card">
+            <div class="login-icon">⚡</div>
+            <h1>Hermes</h1>
+            <p>Control Panel</p>
+            <div class="pin-input-group">
+                <input type="password" id="pin-input" maxlength="6" placeholder="Enter PIN" autocomplete="off">
+            </div>
+            <button id="pin-submit" class="btn btn-primary btn-lg">Unlock</button>
+            <div id="login-error" class="login-error hidden"></div>
+        </div>
+    </div>
+
+    <!-- Main App Shell -->
+    <div id="app-shell" class="app-shell hidden">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <span class="logo">⚡</span>
+                <span class="logo-text">Hermes</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#dashboard" class="nav-link active" data-view="dashboard">
+                    <span class="nav-icon">◉</span> Dashboard</a></li>
+                <li><a href="#agents" class="nav-link" data-view="agents">
+                    <span class="nav-icon">⬡</span> Agents</a></li>
+                <li><a href="#projects" class="nav-link" data-view="projects">
+                    <span class="nav-icon">▦</span> Projects</a></li>
+                <li><a href="#tasks" class="nav-link" data-view="tasks">
+                    <span class="nav-icon">☐</span> Tasks</a></li>
+                <li><a href="#chat" class="nav-link" data-view="chat">
+                    <span class="nav-icon">◈</span> Chat</a></li>
+                <li><a href="#alerts" class="nav-link" data-view="alerts">
+                    <span class="nav-icon">△</span> Alerts
+                    <span id="alert-badge" class="badge hidden">0</span>
+                </a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-ghost btn-sm">Logout</button>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <div id="view-container"></div>
+        </main>
+    </div>
+
+    <!-- Modal overlay -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div id="modal-content" class="modal-content"></div>
+    </div>
+
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/router.js"></script>
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/views/dashboard.js"></script>
+    <script src="/static/js/views/agents.js"></script>
+    <script src="/static/js/views/projects.js"></script>
+    <script src="/static/js/views/tasks.js"></script>
+    <script src="/static/js/views/chat.js"></script>
+    <script src="/static/js/views/alerts.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
