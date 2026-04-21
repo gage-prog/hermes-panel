@@ -113,12 +113,21 @@ async def dashboard(token: str = Depends(require_auth)):
             "SELECT * FROM alerts WHERE acknowledged=0 ORDER BY created_at DESC LIMIT 5"
         ).fetchall()]
 
+        # System info
+        import os
+        system_info = {
+            "model": os.getenv("HERMES_MODEL", "xiaomi/mimo-v2-pro"),
+            "provider": os.getenv("HERMES_PROVIDER", "nous"),
+            "version": "1.0.0",
+        }
+
         return {
             "agents": {"total": agents_total, "active": agents_active},
             "projects": {"total": projects_total, "active": projects_active},
             "tasks": {"total": tasks_total, "pending": tasks_pending, "in_progress": tasks_progress, "completed": tasks_done},
             "alerts": {"unacknowledged": alerts_unack, "recent": recent_alerts},
             "recent_activity": recent_activity,
+            "system": system_info,
         }
     finally:
         db.close()

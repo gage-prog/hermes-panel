@@ -29,6 +29,11 @@ Router.register('dashboard', async (container) => {
                 <div class="stat-sub">${t.pending} pending · ${t.completed} done</div>
             </div>
             <div class="card stat-card">
+                <div class="stat-value" style="color:var(--accent);font-size:1.1rem">${data.system?.model || 'unknown'}</div>
+                <div class="stat-label">Active Model</div>
+                <div class="stat-sub">${data.system?.provider || ''} · v${data.system?.version || '?'}</div>
+            </div>
+            <div class="card stat-card">
                 <div class="stat-value" style="color:${data.alerts.unacknowledged > 0 ? 'var(--danger)' : 'var(--text-muted)'}">${data.alerts.unacknowledged}</div>
                 <div class="stat-label">Open Alerts</div>
                 <div class="stat-sub">unacknowledged</div>
